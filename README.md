@@ -1,37 +1,37 @@
-# redmine_recaptcha
+# Redmine reCAPTCHA v2 plugin
 
-srstclair@gmail.com
+## Legacy
 
-Simple Redmine/ChiliProject plugin to add a reCAPTCHA to user self registration.
+This is a fork of the srstclair's plugin (https://github.com/srstclair/redmine_recaptcha)
 
-Relies on ambethia's recaptcha for rails plugin (http://github.com/ambethia/recaptcha/)
+## About
 
-To install:
+Simple Redmine plugin to add a reCAPTCHA v2 to user self registration.
 
-* make sure you have git installed!
+Relies on ambethia's reCAPTCHA plugin (https://github.com/ambethia/recaptcha)
 
-* cd to your Redmine/ChiliProject directory
+## Requirements
 
-* install the plugin (use sudo if needed)
+Requires Redmine `3.4.0` or newer. Tested on version `3.4.3`.
 
-    * Redmine users
+## Installation
 
-            ruby script/plugin install git://github.com/ambethia/recaptcha.git
-            ruby script/plugin install git://github.com/srstclair/redmine_recaptcha.git 
+* Go to the Redmine's root directory
+* Clone latest version of the plugin:<br>
+  `git clone https://github.com/tallica/redmine_recaptcha_v2 plugins/redmine_recaptcha_v2`
+* Run `bundle install` command to fetch `recaptcha` gem
+* Restart Redmine
+* Sign in as an administrator
+* Go to `Administration` > `Plugins` > `Redmine reCAPTCHA v2 plugin` > `Configure`
+* Go to the [reCAPTCHA website](https://www.google.com/recaptcha) and get the API keys (if you haven't already)
+* Enter your Site and Secret Keys
+* Go to self registration page to see captcha!
 
-    * Chiliproject users
+## Authors
 
-            ruby script/plugin install git://github.com/srstclair/redmine_recaptcha.git 
-            bundle install
+Copyright (c) 2012 Shane R StClair<br>
+Copyright (c) 2017 Michał Lipski
 
-* restart Redmine/ChiliProject
+## License
 
-* sign in as an administrator
-
-* go to Administration/Plugins/reCAPTCHA/Configure
-
-* sign up for a recaptcha key at http://www.google.com/recaptcha (if you haven't already)
-
-* enter your public and private recaptcha keys
-
-* go to self registration page to see captcha!
+Released under the [MIT](http://creativecommons.org/licenses/MIT/) license.
