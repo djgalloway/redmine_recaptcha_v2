@@ -13,7 +13,7 @@ Redmine::Plugin.register :redmine_recaptcha_v2 do
   description "Adds a reCAPTACHA to Redmine's user self registration screen to combat spam"
   version '0.2.0'
   url 'https://github.com/tallica/redmine_recaptcha_v2'
-  requires_redmine :version_or_higher => '3.4.0'
+  requires_redmine :version_or_higher => '3.3.0'
   settings(
     :default => {
       'site_key' => '',

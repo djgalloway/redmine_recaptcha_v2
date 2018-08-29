@@ -18,7 +18,7 @@ module AccountControllerPatch
         user_params = params[:user] || {}
         @user = User.new
         @user.safe_attributes = user_params
-        @user.pref.safe_attributes = params[:pref]
+        @user.pref.attributes = params[:pref] if params[:pref]
         @user.admin = false
         @user.register
         if session[:auth_source_registration]
@@ -32,6 +32,7 @@ module AccountControllerPatch
             redirect_to my_account_path
           end
         else
+          @user.login = params[:user][:login]
           unless user_params[:identity_url].present? && user_params[:password].blank? && user_params[:password_confirmation].blank?
             @user.password, @user.password_confirmation = user_params[:password], user_params[:password_confirmation]
           end

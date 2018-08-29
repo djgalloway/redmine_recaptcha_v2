@@ -2,7 +2,7 @@
 
 ## Legacy
 
-This is a fork of the srstclair's plugin (https://github.com/srstclair/redmine_recaptcha)
+This is a fork of tallica's fork of srstclair's plugin (https://github.com/srstclair/redmine_recaptcha -> https://github.com/tallica/redmine_recaptcha_v2)
 
 ## About
 
@@ -12,13 +12,13 @@ Relies on ambethia's reCAPTCHA plugin (https://github.com/ambethia/recaptcha)
 
 ## Requirements
 
-Requires Redmine `3.4.0` or newer. Tested on version `3.4.3`.
+Requires Redmine `3.3.1` or newer. Tested on version `3.3.1-stable`.
 
 ## Installation
 
 * Go to the Redmine's root directory
 * Clone latest version of the plugin:<br>
-  `git clone https://github.com/tallica/redmine_recaptcha_v2 plugins/redmine_recaptcha_v2`
+  `git clone https://github.com/djgalloway/redmine_recaptcha_v2 plugins/redmine_recaptcha_v2`
 * Run `bundle install` command to fetch `recaptcha` gem
 * Restart Redmine
 * Sign in as an administrator

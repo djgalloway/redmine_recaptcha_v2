@@ -1,3 +1,3 @@
 source "https://rubygems.org"
 
-gem 'recaptcha', '~> 4.6.2', require: 'recaptcha/rails'
+gem 'recaptcha', '> 4.11.0', require: 'recaptcha/rails'
