@@ -1,4 +1,4 @@
 en:
   recaptcha:
     errors:
-      verification_failed: 'reCAPTCHA verifictaion failed. Please try again.'
+      verification_failed: 'reCAPTCHA verification failed. Please try again.'
