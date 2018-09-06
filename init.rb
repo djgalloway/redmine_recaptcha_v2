@@ -5,6 +5,9 @@ ActionDispatch::Callbacks.to_prepare do
   require_dependency 'account_controller'
   require_dependency 'account_controller_patch'
   AccountController.send(:include, AccountControllerPatch)
+  require_dependency 'issues_controller'
+  require_dependency 'issues_controller_patch'
+  IssuesController.send(:include, IssuesControllerPatch) 
 end
 
 Redmine::Plugin.register :redmine_recaptcha_v2 do
