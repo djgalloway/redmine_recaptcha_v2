@@ -47,7 +47,8 @@
 
     <%= f.hidden_field :lock_version %>
     <%= hidden_field_tag 'last_journal_id', params[:last_journal_id] || @issue.last_journal_id %>
-    <%= recaptcha_tags(site_key: Setting.plugin_redmine_recaptcha_v2['site_key']) if (User.current.anonymous? || !User.current.member_of?(@project.parent)) %>
+    <%# Disabling this for now.  User can still update even if recaptcha fails %>
+    <%# recaptcha_tags(site_key: Setting.plugin_redmine_recaptcha_v2['site_key']) if (User.current.anonymous? || !User.current.member_of?(@project.parent)) %>
     <%= submit_tag l(:button_submit) %>
     <%= preview_link preview_edit_issue_path(:project_id => @project, :id => @issue), 'issue-form' %>
     | <%= link_to l(:button_cancel), {}, :onclick => "$('#update').hide(); return false;" %>

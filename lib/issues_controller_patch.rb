@@ -4,7 +4,7 @@ module IssuesControllerPatch
 
     base.class_eval do
       alias_method_chain :create, :recaptcha_verification
-      alias_method_chain :update, :recaptcha_verification
+#      alias_method_chain :update, :recaptcha_verification
     end
   end
   
@@ -42,37 +42,40 @@ module IssuesControllerPatch
         #create_without_recaptcha_verification
     end
 
-    def update_with_recaptcha_verification
-      return unless update_issue_from_params
-      @issue.save_attachments(params[:attachments] || (params[:issue] && params[:issue][:uploads]))
-      saved = false
-      begin
-        saved = save_issue_with_child_records
-      rescue ActiveRecord::StaleObjectError
-        @conflict = true
-        if params[:last_journal_id]
-          @conflict_journals = @issue.journals_after(params[:last_journal_id]).to_a
-          @conflict_journals.reject!(&:private_notes?) unless User.current.allowed_to?(:view_private_notes, @issue.project)
-        end
-      end
-  
-      if (User.current.member_of?(@project.parent) || verify_recaptcha( :secret_key => Setting.plugin_redmine_recaptcha_v2['secret_key'], :model => @user, :message => "reCAPTCHA verification failed. Please try again." )) && saved
-        render_attachment_warning_if_needed(@issue)
-        flash[:notice] = l(:notice_successful_update) unless @issue.current_journal.new_record?
-  
-        respond_to do |format|
-          format.html { redirect_back_or_default issue_path(@issue, previous_and_next_issue_ids_params) }
-          format.api  { render_api_ok }
-        end
-      else
-        respond_to do |format|
-          format.html { render :action => 'edit' }
-          format.api  { render_validation_errors(@issue) }
-        end
-      end
-        #the old method is accessible here:
-        #update_without_recaptcha_verification
-    end
+#    Disabling this for now.  When recaptcha would fail, the error message would get displayed but the issue still got updated.
+#    We primarily care about new issues getting created with recaptcha (which does work)
+#
+#    def update_with_recaptcha_verification
+#      return unless update_issue_from_params
+#      @issue.save_attachments(params[:attachments] || (params[:issue] && params[:issue][:uploads]))
+#      saved = false
+#      begin
+#        saved = save_issue_with_child_records
+#      rescue ActiveRecord::StaleObjectError
+#        @conflict = true
+#        if params[:last_journal_id]
+#          @conflict_journals = @issue.journals_after(params[:last_journal_id]).to_a
+#          @conflict_journals.reject!(&:private_notes?) unless User.current.allowed_to?(:view_private_notes, @issue.project)
+#        end
+#      end
+#  
+#      if (User.current.member_of?(@project.parent) || verify_recaptcha( :secret_key => Setting.plugin_redmine_recaptcha_v2['secret_key'], :model => @user, :message => "reCAPTCHA verification failed. Please try again." )) && saved
+#        render_attachment_warning_if_needed(@issue)
+#        flash[:notice] = l(:notice_successful_update) unless @issue.current_journal.new_record?
+#  
+#        respond_to do |format|
+#          format.html { redirect_back_or_default issue_path(@issue, previous_and_next_issue_ids_params) }
+#          format.api  { render_api_ok }
+#        end
+#      else
+#        respond_to do |format|
+#          format.html { render :action => 'edit' }
+#          format.api  { render_validation_errors(@issue) }
+#        end
+#      end
+#        #the old method is accessible here:
+#        #update_without_recaptcha_verification
+#    end
   end
 end
 
